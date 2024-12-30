@@ -1,0 +1,41 @@
+schema {
+    query: Query
+}
+
+type Query {
+    orders: OrderConnection
+}
+
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    orders: [OrderProduct!]!
+}
+
+type Customer {
+    id: ID!
+    email: AWSEmail!
+    fullName: String!
+    orders: [Order!]!
+}
+
+type OrderProduct {
+    quantity: Int!
+    product: Product!
+    order: Order!
+}
+
+type Order {
+    id: ID!
+    date: AWSDate!
+    totalAmount: Float!
+    productsQuantity: Int!
+    customer: Customer!
+    products: [OrderProduct!]!
+}
+
+type OrderConnection {
+    items: [Order]
+    nextToken: String
+}
