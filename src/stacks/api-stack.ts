@@ -21,6 +21,9 @@ export class ApiStack extends cdk.Stack {
             definition: appsync.Definition.fromFile(
                 path.join(__dirname, "graphql", "schema.graphql"),
             ),
+            environmentVariables: {
+                TABLE_NAME : props.table.tableName,
+            },
             authorizationConfig: {
                 defaultAuthorization: {
                     authorizationType: appsync.AuthorizationType.API_KEY,

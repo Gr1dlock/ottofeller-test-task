@@ -19,6 +19,17 @@ export class StorageStack extends cdk.Stack {
             },
             sortKey: { name: "SK", type: dynamodb.AttributeType.STRING },
             billing: dynamodb.Billing.onDemand(),
+            removalPolicy: cdk.RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE,
+        });
+
+        // Add a global secondary index to the table
+        this.table.addGlobalSecondaryIndex({
+            indexName: "GSI1",
+            partitionKey: {
+                name: "Type",
+                type: dynamodb.AttributeType.STRING,
+            },
+            sortKey: { name: "SK", type: dynamodb.AttributeType.STRING },
         });
     }
 }
